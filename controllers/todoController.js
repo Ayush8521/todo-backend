@@ -1,6 +1,5 @@
 const Todo = require('../models/Todo');
 
-// 1. Create a Todo (DEBUG VERSION)
 exports.createTodo = async (req, res) => {
   try {
     console.log("--- DEBUG START ---");
@@ -8,7 +7,6 @@ exports.createTodo = async (req, res) => {
 
     const { title, description } = req.body;
 
-    // Check if title is missing
     if (!title) {
         console.log("2. Error: Title is missing");
         return res.status(400).json({ message: "Title is required in the JSON body" });
@@ -23,13 +21,11 @@ exports.createTodo = async (req, res) => {
     res.status(201).json({ message: 'Todo created successfully', todo: newTodo });
 
   } catch (error) {
-    console.error("!!! ERROR DETAILS !!!", error); // This prints to VS Code Terminal
-    // We send 'error.message' so you can see it in Postman
+    console.error("!!! ERROR DETAILS !!!", error); 
     res.status(500).json({ message: 'Error creating todo', error: error.message });
   }
 };
 
-// ... (Keep your other exports like getTodos, updateTodo, etc. below here)
 exports.getTodos = async (req, res) => {
   try {
     const todos = await Todo.find();
